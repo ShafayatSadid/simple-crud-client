@@ -1,10 +1,17 @@
+'use client'
+
 import { AlertDialog, Button, Table } from '@heroui/react';
 import Link from 'next/link';
 
 
-const UsersTable = ({ users }) => {
+const UsersTable = ({ users, deleteUserAction }) => {
+
+    // delete function
+    const handleDelete = async (id) => {
+        await deleteUserAction(id)
+    }
     return (
-        <Table>
+        <Table className='max-w-11/12 mx-auto'>
             <Table.ScrollContainer>
                 <Table.Content aria-label="Team members" className="min-w-[600px]">
 
@@ -29,42 +36,44 @@ const UsersTable = ({ users }) => {
                                     <Link href={`users/${user._id}`}>
                                         <Button variant="secondary">View Details</Button>
                                     </Link>
+
                                     {/* edit */}
                                     <Link href={`users/${user._id}`}>
                                         <Button className={"mx-2"} variant="secondary">Edit</Button>
                                     </Link>
+
                                     {/* delete btn */}
-                                
-                                            <AlertDialog>
-                                                <Button variant="danger">Delete</Button>
-                                                <AlertDialog.Backdrop>
-                                                    <AlertDialog.Container>
-                                                        <AlertDialog.Dialog className="sm:max-w-[400px]">
-                                                            <AlertDialog.CloseTrigger />
-                                                            <AlertDialog.Header>
-                                                                <AlertDialog.Icon status="danger" />
-                                                                <AlertDialog.Heading>Delete project permanently?</AlertDialog.Heading>
-                                                            </AlertDialog.Header>
-                                                            <AlertDialog.Body>
-                                                                <p>
-                                                                    This will permanently delete <strong>My Awesome Project</strong> and all of its
-                                                                    data. This action cannot be undone.
-                                                                </p>
-                                                            </AlertDialog.Body>
-                                                            <AlertDialog.Footer>
-                                                                <Button slot="close" variant="tertiary">
-                                                                    Cancel
-                                                                </Button>
-                                                                <Button slot="close" variant="danger">
-                                                                    Delete Project
-                                                                </Button>
-                                                            </AlertDialog.Footer>
-                                                        </AlertDialog.Dialog>
-                                                    </AlertDialog.Container>
-                                                </AlertDialog.Backdrop>
-                                            </AlertDialog>
-                                    
-                                    
+                                    <AlertDialog>
+                                        <Button variant="danger">Delete</Button>
+                                        <AlertDialog.Backdrop>
+                                            <AlertDialog.Container>
+                                                <AlertDialog.Dialog className="sm:max-w-[400px]">
+                                                    <AlertDialog.CloseTrigger />
+                                                    <AlertDialog.Header>
+                                                        <AlertDialog.Icon status="danger" />
+                                                        <AlertDialog.Heading>Delete user permanently?</AlertDialog.Heading>
+                                                    </AlertDialog.Header>
+                                                    <AlertDialog.Body>
+                                                        <p>
+                                                            This will permanently delete <strong>My Awesome Project</strong> and all of its
+                                                            data. This action cannot be undone.
+                                                        </p>
+                                                    </AlertDialog.Body>
+                                                    <AlertDialog.Footer>
+                                                        <Button slot="close" variant="tertiary">
+                                                            Cancel
+                                                        </Button>
+                                                        {/* delete btn */}
+                                                        <Button onClick={() => handleDelete(user._id)} slot="close" variant="danger">
+                                                            Delete User
+                                                        </Button>
+                                                    </AlertDialog.Footer>
+                                                </AlertDialog.Dialog>
+                                            </AlertDialog.Container>
+                                        </AlertDialog.Backdrop>
+                                    </AlertDialog>
+
+
                                 </Table.Cell>
 
                             </Table.Row>)
