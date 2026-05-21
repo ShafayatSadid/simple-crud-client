@@ -2,7 +2,7 @@
 import { Envelope } from "@gravity-ui/icons";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 
-const AddUserModal = () => {
+const AddUserModal = ({ createUserAction }) => {
     return (
         <Modal>
             <Button variant="secondary">Add New User</Button>
@@ -11,13 +11,13 @@ const AddUserModal = () => {
                     <Modal.Dialog className="sm:max-w-md">
                         <Modal.CloseTrigger />
                         <Modal.Header>
-                            
+
                             <Modal.Heading>Add New User</Modal.Heading>
-                            
+
                         </Modal.Header>
                         <Modal.Body className="p-6">
                             <Surface variant="default">
-                                <form className="flex flex-col gap-4">
+                                <form action={createUserAction} className="flex flex-col gap-4">
                                     <TextField className="w-full" name="name" type="text">
                                         <Label>Name</Label>
                                         <Input placeholder="Enter your name" />
@@ -30,15 +30,17 @@ const AddUserModal = () => {
                                         <Label>Role</Label>
                                         <Input placeholder="Enter user role" />
                                     </TextField>
+
+                                    <Modal.Footer>
+                                        <Button slot="close" variant="secondary">
+                                            Cancel
+                                        </Button>
+                                        <Button type="submit" slot="close">Add User</Button>
+                                    </Modal.Footer>
                                 </form>
                             </Surface>
                         </Modal.Body>
-                        <Modal.Footer>
-                            <Button slot="close" variant="secondary">
-                                Cancel
-                            </Button>
-                            <Button slot="close">Add User</Button>
-                        </Modal.Footer>
+
                     </Modal.Dialog>
                 </Modal.Container>
             </Modal.Backdrop>
