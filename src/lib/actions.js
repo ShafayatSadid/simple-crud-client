@@ -20,6 +20,21 @@ export const createUser = async (formData) => {
     return data
 }
 
+export const updateUser = async(formData)=>{
+    'use server'
+    const updatedUser = Object.fromEntries(formData.entries());
+    const res = await fetch(``,{
+        method: 'PATCH',
+        headers:{
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(updatedUser)
+    })
+
+    const data = await res.json();
+    // TODO
+}
+
 export const deleteUser = async (id) => {
     'use server'
     const response = await fetch(`http://localhost:5001/users/${id}`, {
